@@ -1,3 +1,9 @@
+## 👤 Author
+
+Built by Muhammad Dildar.
+
+Focused on building systems that reward discipline over motivation.
+
 # 🚀 DEv-War
 
 DevWar is a competitive learning tracker designed to turn daily progress into a measurable war.
