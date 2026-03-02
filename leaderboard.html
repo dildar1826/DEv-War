@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="DevWar Leaderboard — See how you rank against other developers.">
+    <title>DevWar — Leaderboard</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <a href="dashboard.html" class="nav-brand">Dev<span>War</span></a>
+            <div class="nav-links">
+                <a href="dashboard.html" class="nav-link">Dashboard</a>
+                <a href="leaderboard.html" class="nav-link active">Leaderboard</a>
+                <a href="war.html" class="nav-link">War</a>
+                <a href="profile.html" class="nav-link">Profile</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="page-wrapper">
+        <div class="container">
+            <div class="flex-between mb-3 animate-in">
+                <div>
+                    <h1>Leaderboard</h1>
+                    <p class="text-muted">Top developers ranked by XP</p>
+                </div>
+                <button class="btn btn-secondary btn-sm" onclick="loadLeaderboard()">↻ Refresh</button>
+            </div>
+
+            <!-- Pending Wars Notification -->
+            <div id="pendingWarsBar" class="war-notifications hidden animate-in">
+                <div class="card-header">
+                    <span class="card-title">⚔️ Incoming Challenges</span>
+                </div>
+                <div id="pendingWarsList"></div>
+            </div>
+
+            <!-- Leaderboard Table -->
+            <div class="card animate-in animate-in-delay-1">
+                <table class="leaderboard-table">
+                    <thead>
+                        <tr>
+                            <th>Rank</th>
+                            <th>Developer</th>
+                            <th>XP</th>
+                            <th>Level</th>
+                            <th>Streak</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody id="leaderboardBody">
+                        <tr>
+                            <td colspan="6">
+                                <div class="page-loader">
+                                    <div class="spinner"></div>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="js/config.js"></script>
+    <script src="js/supabase.js"></script>
+    <script src="js/leaderboard.js"></script>
+</body>
+
+</html>

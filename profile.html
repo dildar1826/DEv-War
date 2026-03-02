@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="DevWar Profile — View and edit your developer profile.">
+    <title>DevWar — Profile</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <a href="dashboard.html" class="nav-brand">Dev<span>War</span></a>
+            <div class="nav-links">
+                <a href="dashboard.html" class="nav-link">Dashboard</a>
+                <a href="leaderboard.html" class="nav-link">Leaderboard</a>
+                <a href="war.html" class="nav-link">War</a>
+                <a href="profile.html" class="nav-link active">Profile</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="page-wrapper">
+        <div class="container">
+            <!-- Profile Header -->
+            <div class="card animate-in" style="margin-bottom: 2rem;">
+                <div class="profile-header">
+                    <div class="profile-avatar-xl" id="profileAvatar">?</div>
+                    <div class="profile-info">
+                        <h2 id="profileUsername">Loading...</h2>
+                        <p id="profileJoined">Member since ...</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Stats Summary -->
+            <div class="stats-grid animate-in animate-in-delay-1">
+                <div class="stat-card">
+                    <div class="stat-icon">⚡</div>
+                    <div class="stat-label">Total XP</div>
+                    <div class="stat-value accent" id="pStatXP">0</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">🏆</div>
+                    <div class="stat-label">Level</div>
+                    <div class="stat-value warning" id="pStatLevel">0</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">🔥</div>
+                    <div class="stat-label">Current Streak</div>
+                    <div class="stat-value success" id="pStatStreak">0d</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">🏅</div>
+                    <div class="stat-label">Longest Streak</div>
+                    <div class="stat-value" id="pStatLongest">0d</div>
+                </div>
+            </div>
+
+            <div class="dashboard-grid">
+                <!-- Edit Profile -->
+                <div class="card animate-in animate-in-delay-2">
+                    <div class="card-header">
+                        <span class="card-title">✏️ Edit Profile</span>
+                    </div>
+                    <form id="profileForm" onsubmit="handleUpdateProfile(event)">
+                        <div class="input-group">
+                            <label for="editUsername">Username</label>
+                            <input type="text" id="editUsername" placeholder="Your username" required minlength="3"
+                                maxlength="20">
+                        </div>
+                        <div class="input-group">
+                            <label for="editAvatar">Avatar URL (optional)</label>
+                            <input type="url" id="editAvatar" placeholder="https://...">
+                        </div>
+                        <button type="submit" class="btn btn-primary" id="saveProfileBtn">Save Changes</button>
+                    </form>
+                </div>
+
+                <!-- War Record -->
+                <div class="card animate-in animate-in-delay-3">
+                    <div class="card-header">
+                        <span class="card-title">⚔️ War Record</span>
+                    </div>
+                    <div class="stats-grid" style="margin-bottom:0">
+                        <div class="stat-card" style="padding:1rem">
+                            <div class="stat-label">Wars Won</div>
+                            <div class="stat-value success" id="warsWon" style="font-size:1.5rem">0</div>
+                        </div>
+                        <div class="stat-card" style="padding:1rem">
+                            <div class="stat-label">Wars Lost</div>
+                            <div class="stat-value" id="warsLost" style="font-size:1.5rem;color:var(--danger)">0</div>
+                        </div>
+                        <div class="stat-card" style="padding:1rem">
+                            <div class="stat-label">Active Wars</div>
+                            <div class="stat-value accent" id="warsActive" style="font-size:1.5rem">0</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Account Actions -->
+                <div class="card animate-in animate-in-delay-4 full-width">
+                    <div class="card-header">
+                        <span class="card-title">⚙️ Account</span>
+                    </div>
+                    <div class="flex gap-1">
+                        <button class="btn btn-danger" onclick="handleLogout()">Log Out</button>
+                    </div>
+                    <p class="text-muted mt-2" style="font-size:0.8rem" id="accountEmail"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="js/config.js"></script>
+    <script src="js/supabase.js"></script>
+    <script src="js/profile.js"></script>
+</body>
+
+</html>

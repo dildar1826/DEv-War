@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="DevWar Dashboard — Track your coding hours, manage tasks, earn XP and level up.">
+    <title>DevWar — Dashboard</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <a href="dashboard.html" class="nav-brand">Dev<span>War</span></a>
+            <div class="nav-links">
+                <a href="dashboard.html" class="nav-link active">Dashboard</a>
+                <a href="leaderboard.html" class="nav-link">Leaderboard</a>
+                <a href="war.html" class="nav-link">War</a>
+                <a href="profile.html" class="nav-link">Profile</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="page-wrapper">
+        <div class="container">
+            <!-- Page Header -->
+            <div class="flex-between mb-3 animate-in">
+                <div>
+                    <h1>Dashboard</h1>
+                    <p class="text-muted" id="welcomeText">Welcome back</p>
+                </div>
+                <div class="flex gap-1">
+                    <span class="text-muted" style="font-size:0.8rem;" id="todayDate"></span>
+                </div>
+            </div>
+
+            <!-- Stats Bar -->
+            <div class="stats-grid animate-in animate-in-delay-1">
+                <div class="stat-card">
+                    <div class="stat-icon">⚡</div>
+                    <div class="stat-label">Total XP</div>
+                    <div class="stat-value accent" id="statXP">0</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">🏆</div>
+                    <div class="stat-label">Level</div>
+                    <div class="stat-value warning" id="statLevel">0</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">🔥</div>
+                    <div class="stat-label">Streak</div>
+                    <div class="stat-value success" id="statStreak">0 days</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">⏱️</div>
+                    <div class="stat-label">Total Hours</div>
+                    <div class="stat-value" id="statHours">0</div>
+                </div>
+            </div>
+
+            <!-- XP Progress Bar -->
+            <div class="xp-bar-wrapper animate-in animate-in-delay-2">
+                <div class="xp-bar-label">
+                    <span id="xpCurrent">Level 0</span>
+                    <span id="xpNext">Next: Level 1</span>
+                </div>
+                <div class="xp-bar">
+                    <div class="xp-bar-fill" id="xpBarFill" style="width: 0%"></div>
+                </div>
+            </div>
+
+            <!-- Dashboard Grid -->
+            <div class="dashboard-grid">
+                <!-- Log Hours -->
+                <div class="card animate-in animate-in-delay-2">
+                    <div class="card-header">
+                        <span class="card-title">📝 Log Hours</span>
+                    </div>
+                    <form id="logForm" onsubmit="handleLogHours(event)">
+                        <div class="log-row">
+                            <div class="input-group">
+                                <label for="logHours">Hours Today</label>
+                                <input type="number" id="logHours" min="0" max="24" step="0.5" placeholder="0" required>
+                            </div>
+                            <div class="input-group">
+                                <label for="logNotes">Notes (optional)</label>
+                                <input type="text" id="logNotes" placeholder="What did you work on?">
+                            </div>
+                            <button type="submit" class="btn btn-primary" id="logBtn">Log</button>
+                        </div>
+                    </form>
+                    <p class="text-muted mt-1" style="font-size:0.8rem;" id="todayLogStatus">No hours logged today</p>
+                </div>
+
+                <!-- Activity Chart -->
+                <div class="card animate-in animate-in-delay-3">
+                    <div class="card-header">
+                        <span class="card-title">📊 Weekly Activity</span>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="activityChart"></canvas>
+                    </div>
+                </div>
+
+                <!-- Tasks -->
+                <div class="card animate-in animate-in-delay-3">
+                    <div class="card-header">
+                        <span class="card-title">✅ Daily Tasks</span>
+                        <span class="text-muted" style="font-size:0.8rem;" id="taskCount">0 / 0</span>
+                    </div>
+                    <div class="task-input-row">
+                        <input type="text" id="taskInput" placeholder="Add a task…" maxlength="100">
+                        <button class="btn btn-primary btn-sm" onclick="handleAddTask()">Add</button>
+                    </div>
+                    <div id="taskList"></div>
+                </div>
+
+                <!-- Projects -->
+                <div class="card animate-in animate-in-delay-4">
+                    <div class="card-header">
+                        <span class="card-title">🚀 Projects</span>
+                        <button class="btn btn-secondary btn-sm" onclick="openProjectModal()">+ Add</button>
+                    </div>
+                    <div class="projects-grid" id="projectsGrid"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add Project Modal -->
+    <div class="modal-overlay" id="projectModal">
+        <div class="modal">
+            <div class="modal-header">
+                <h3>Add Project</h3>
+                <button class="modal-close" onclick="closeProjectModal()">✕</button>
+            </div>
+            <form id="projectForm" onsubmit="handleAddProject(event)">
+                <div class="input-group">
+                    <label for="projName">Project Name</label>
+                    <input type="text" id="projName" placeholder="My Awesome App" required>
+                </div>
+                <div class="input-group">
+                    <label for="projDesc">Description</label>
+                    <textarea id="projDesc" placeholder="Brief description of the project…"></textarea>
+                </div>
+                <div class="input-group">
+                    <label for="projTech">Tech Stack</label>
+                    <input type="text" id="projTech" placeholder="React, Node.js, PostgreSQL">
+                </div>
+                <div class="input-group">
+                    <label for="projUrl">URL (optional)</label>
+                    <input type="url" id="projUrl" placeholder="https://github.com/...">
+                </div>
+                <button type="submit" class="btn btn-primary" style="width:100%">Add Project</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4"></script>
+    <script src="js/config.js"></script>
+    <script src="js/supabase.js"></script>
+    <script src="js/dashboard.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="DevWar Arena — Battle other developers in a side-by-side stat comparison.">
+    <title>DevWar — War Arena</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <a href="dashboard.html" class="nav-brand">Dev<span>War</span></a>
+            <div class="nav-links">
+                <a href="dashboard.html" class="nav-link">Dashboard</a>
+                <a href="leaderboard.html" class="nav-link">Leaderboard</a>
+                <a href="war.html" class="nav-link active">War</a>
+                <a href="profile.html" class="nav-link">Profile</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="page-wrapper">
+        <div class="container">
+            <div class="flex-between mb-3 animate-in">
+                <div>
+                    <h1>⚔️ War Arena</h1>
+                    <p class="text-muted" id="warSubtitle">Your active battles</p>
+                </div>
+            </div>
+
+            <!-- War Selector / List -->
+            <div id="warList" class="animate-in animate-in-delay-1">
+                <div class="page-loader">
+                    <div class="spinner"></div>
+                </div>
+            </div>
+
+            <!-- War Arena (shown when viewing a specific war) -->
+            <div id="warArenaSection" class="hidden">
+                <div class="war-arena animate-in">
+                    <!-- Player 1 (Challenger) -->
+                    <div class="war-player" id="player1Card">
+                        <div class="war-avatar-lg" id="player1Avatar">?</div>
+                        <div class="war-username" id="player1Name">Player 1</div>
+                        <div class="war-stats">
+                            <div class="war-stat">
+                                <span class="war-stat-label">XP</span>
+                                <span class="war-stat-value text-accent" id="player1XP">0</span>
+                            </div>
+                            <div class="war-stat">
+                                <span class="war-stat-label">Level</span>
+                                <span class="war-stat-value" id="player1Level" style="color:var(--warning)">0</span>
+                            </div>
+                            <div class="war-stat">
+                                <span class="war-stat-label">Hours</span>
+                                <span class="war-stat-value" id="player1Hours">0</span>
+                            </div>
+                            <div class="war-stat">
+                                <span class="war-stat-label">Streak</span>
+                                <span class="war-stat-value" id="player1Streak" style="color:var(--success)">0d</span>
+                            </div>
+                            <div class="war-stat">
+                                <span class="war-stat-label">Projects</span>
+                                <span class="war-stat-value" id="player1Projects">0</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- VS -->
+                    <div class="war-vs">
+                        <span class="war-vs-text">VS</span>
+                    </div>
+
+                    <!-- Player 2 (Opponent) -->
+                    <div class="war-player" id="player2Card">
+                        <div class="war-avatar-lg" id="player2Avatar">?</div>
+                        <div class="war-username" id="player2Name">Player 2</div>
+                        <div class="war-stats">
+                            <div class="war-stat">
+                                <span class="war-stat-label">XP</span>
+                                <span class="war-stat-value text-accent" id="player2XP">0</span>
+                            </div>
+                            <div class="war-stat">
+                                <span class="war-stat-label">Level</span>
+                                <span class="war-stat-value" id="player2Level" style="color:var(--warning)">0</span>
+                            </div>
+                            <div class="war-stat">
+                                <span class="war-stat-label">Hours</span>
+                                <span class="war-stat-value" id="player2Hours">0</span>
+                            </div>
+                            <div class="war-stat">
+                                <span class="war-stat-label">Streak</span>
+                                <span class="war-stat-value" id="player2Streak" style="color:var(--success)">0d</span>
+                            </div>
+                            <div class="war-stat">
+                                <span class="war-stat-label">Projects</span>
+                                <span class="war-stat-value" id="player2Projects">0</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- War Actions -->
+                <div class="text-center mt-3 animate-in animate-in-delay-2">
+                    <div id="warActions"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="js/config.js"></script>
+    <script src="js/supabase.js"></script>
+    <script src="js/war.js"></script>
+</body>
+
+</html>
